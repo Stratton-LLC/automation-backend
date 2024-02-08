@@ -21,17 +21,6 @@ dotenv.config();
 
 const app = express();
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDFhWVqxYYjjJ5-BcksV76qnFzYCYmm0A0",
-    authDomain: "automation-basecamp.firebaseapp.com",
-    projectId: "automation-basecamp",
-    storageBucket: "automation-basecamp.appspot.com",
-    messagingSenderId: "458172793587",
-    appId: "1:458172793587:web:82307ceec49c16ad022d86",
-    measurementId: "G-F2F882MVWC",
-};
-
-
 // Specify the allowed origin(s) for CORS
 const allowedOrigins = ["http://localhost:3000"];
 app.use(
