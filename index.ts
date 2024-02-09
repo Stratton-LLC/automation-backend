@@ -4,8 +4,6 @@ require("dotenv").config({
             ? ".env.production"
             : ".env.local",
 });
-
-import * as dotenv from "dotenv";
 import express from "express";
 import http from "http";
 import bodyParser from "body-parser";
@@ -16,13 +14,18 @@ import mongoose from "mongoose";
 import router from "./app/router";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
-dotenv.config();
+import admin from "firebase-admin";
 
 const app = express();
 
+var serviceAccount = require("./serviceAccount.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
+
 // Specify the allowed origin(s) for CORS
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["localhost:3000", "http://localhost:3000"];
 app.use(
     cors({
         credentials: true,
@@ -33,7 +36,6 @@ app.use(
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
-app.use(bodyParser.json());
 // Use JSON parser for all non-webhook routes
 app.use(
     (
