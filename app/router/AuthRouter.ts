@@ -21,6 +21,11 @@ export const getUserVerification = async (
         const email = decodedToken.email;
 
         let user = await getUserByEmail(email);
+        if (!user) {
+            return res
+                .status(404)
+                .json({ message: "Account with that email not found" });
+        }
         await updateUserAuthToken(email, idToken);
         await updateUserSessionToken(email);
 
@@ -58,7 +63,13 @@ export const getUserInfo = async (
 
         // Consider what information you want to return about the user
         // Ensure not to expose sensitive information
-        return res.status(200).json(user.info);
+        return (
+            //send both user.info and user.employeeId
+            res.status(200).json({
+                info: user.info,
+                employeeId: user.employeeId,
+            })
+        );
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal server error" });

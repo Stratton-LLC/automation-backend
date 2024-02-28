@@ -130,24 +130,24 @@ export const updateUser = async (
     }
 };
 
-// export const getUserRole = async (
-//     req: express.Request,
-//     res: express.Response
-// ) => {
-//     try {
-//         const { id } = req.params;
-//         const user = await getUserById(id);
+export const getUserRole = async (
+    req: express.Request,
+    res: express.Response
+) => {
+    try {
+        const { id } = req.params;
+        const user = await getUserById(id);
 
-//         if (!user) {
-//             return res.sendStatus(404);
-//         }
+        if (!user) {
+            return res.sendStatus(404);
+        }
 
-//         res.json({ role: user.info.role });
-//     } catch (error) {
-//         console.log(error);
-//         res.sendStatus(500);
-//     }
-// };
+        res.json({ role: user.info.role });
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+};
 
 export const getUsernameAvailability = async (
     req: express.Request,

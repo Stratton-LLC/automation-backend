@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
         loggedIn: { type: Boolean, default: false },
         role: { type: String, enum: ["user", "admin"], default: "user" },
         lastLoggedIn: { type: Date, default: null },
+        name: { type: String, default: null },
     },
     createdAt: { type: Date, default: Date.now },
     lastUpdateAt: { type: Date, default: Date.now },
