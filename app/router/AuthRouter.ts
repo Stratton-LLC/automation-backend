@@ -16,7 +16,6 @@ export const getUserVerification = async (
 ) => {
     try {
         const { idToken } = req.body;
-
         const decodedToken = await admin.auth().verifyIdToken(idToken);
         const email = decodedToken.email;
 

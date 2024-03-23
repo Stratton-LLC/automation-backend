@@ -36,6 +36,7 @@ app.use(
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
+
 // Use JSON parser for all non-webhook routes
 app.use(
     (
