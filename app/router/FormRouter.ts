@@ -60,9 +60,9 @@ const updateForm = async (req: express.Request, res: express.Response) => {
 };
 
 export default (router: express.Router) => {
-    router.get("/forms", getAllForms);
-    router.get("/forms/:formId", getFormId);
-    router.post("/forms", createForm);
-    router.delete("/forms/:formId", deleteForm);
-    router.patch("/forms/:formId", updateForm);
+    router.get("/api/forms", getAllForms);
+    router.get("/api/forms/:formId", getFormId);
+    router.post("/api/forms", createForm);
+    router.delete("/api/forms/:formId", deleteForm);
+    router.patch("/api/forms/:formId", updateForm);
 };
