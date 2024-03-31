@@ -12,8 +12,6 @@ import compression from "compression";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./app/router";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import admin from "firebase-admin";
 
 const app = express();

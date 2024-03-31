@@ -5,7 +5,7 @@ import {
     createNewForm,
     deleteFormById,
     updateFormById,
-} from "../models/FormModel";
+} from "../models/DailyFormModel";
 
 const getAllForms = async (req: express.Request, res: express.Response) => {
     try {
@@ -19,11 +19,7 @@ const getAllForms = async (req: express.Request, res: express.Response) => {
 
 const createForm = async (req: express.Request, res: express.Response) => {
     try {
-        const { formLabel, content } = req.body;
-        const { formId } = req.params;
-        const newForm = await createNewForm({ formId, formLabel, content });
-        newForm.createdAt = new Date();
-        newForm.lastUpdateAt = new Date();
+        const newForm = await createNewForm(req.body);
         return res.status(201).json(newForm);
     } catch (error) {
         console.log(error);
@@ -34,8 +30,8 @@ const createForm = async (req: express.Request, res: express.Response) => {
 const deleteForm = async (req: express.Request, res: express.Response) => {
     try {
         const { formId } = req.params;
-        const deletedForm = deleteFormById(formId);
-        return res.json(deletedForm);
+        await deleteFormById(formId);
+        return res.json({ message: "Form deleted" });
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -45,14 +41,8 @@ const deleteForm = async (req: express.Request, res: express.Response) => {
 const updateForm = async (req: express.Request, res: express.Response) => {
     try {
         const { formId } = req.params;
-        const { formLabel, content } = req.body;
-        if (!formId) {
-            return res.status(400).json({ message: "formId is required" });
-        }
-        const form = getFormId(formId);
-
-        updateFormById(formId, { formLabel, content });
-        return res.status(200).json(form);
+        const updatedForm = await updateFormById(formId, req.body);
+        return res.status(200).json(updatedForm);
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -60,9 +50,9 @@ const updateForm = async (req: express.Request, res: express.Response) => {
 };
 
 export default (router: express.Router) => {
-    router.get("/api/forms", getAllForms);
-    router.get("/api/forms/:formId", getFormId);
-    router.post("/api/forms", createForm);
-    router.delete("/api/forms/:formId", deleteForm);
-    router.patch("/api/forms/:formId", updateForm);
+    router.get("/api/dailyforms", getAllForms);
+    router.get("/api/dailyforms/:formId", getFormId);
+    router.post("/api/dailyforms", createForm);
+    router.delete("/api/dailyforms/:formId", deleteForm);
+    router.patch("/api/dailyforms/:formId", updateForm);
 };

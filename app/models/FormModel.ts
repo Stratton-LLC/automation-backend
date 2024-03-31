@@ -12,6 +12,8 @@ const FormSchema = new mongoose.Schema({
     },
     createdAt: { type: Date, default: Date.now },
     lastUpdateAt: { type: Date, default: Date.now },
+    visible: { type: Boolean, default: true },
+    deleted: { type: Boolean, default: false },
 });
 
 export const FormModel = mongoose.model("Form", FormSchema);
