@@ -23,6 +23,8 @@ const DailyFormSchema = new Schema({
             cash5: { type: Number, required: true },
             cash10: { type: Number, required: true },
             cash20: { type: Number, required: true },
+            cash50: { type: Number, required: true },
+            cash100: { type: Number, required: true },
             totalCashInBag: { type: Number, required: true },
         },
         cashInRegister: { type: Number, required: true },
